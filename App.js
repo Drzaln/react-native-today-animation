@@ -15,8 +15,8 @@ const App = () => {
 				<Stack.Screen name='Home' component={Home} />
 				{SCREENS_LIST.map((item) => (
 					<Stack.Screen
-						key={item.name}
-						name={toString(item.screen)}
+						key={item.screenRoute}
+						name={item.screenRoute}
 						component={item.screen}
 						options={{ headerTitle: item.name }}
 					/>

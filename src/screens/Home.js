@@ -5,7 +5,7 @@ import SCREENS_LIST from '../screenList'
 
 const Home = ({ navigation }) => {
 	const renderItem = ({ item }) => (
-		<Pressable style={styles.item} onPress={() => navigation.navigate(toString(item.screen))}>
+		<Pressable style={styles.item} onPress={() => navigation.navigate(item.screenRoute)}>
 			<Text>{item.name}</Text>
 		</Pressable>
 	)

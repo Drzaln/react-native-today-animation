@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withDelay, withTiming } from 'react-native-reanimated'
 import Icon from 'react-native-vector-icons/Feather'
 
-const AnimateButton = () => {
+const DownloadButton = () => {
 	const width = useSharedValue(0)
 	const success = useSharedValue(false)
 	const animateWidth = useAnimatedStyle(() => {
@@ -51,32 +51,25 @@ const AnimateButton = () => {
 		}
 	})
 	return (
-		<View style={styles.container}>
-			<Pressable style={styles.button} onPress={() => (width.value = 1)}>
-				<Animated.View style={[ styles.overlay, animateWidth ]} />
-				<Animated.View style={[ styles.success, successY ]}>
-					<Icon name='check' size={24} color='#fff' />
-					<Text style={styles.successText}>Success</Text>
+		<Pressable style={styles.button} onPress={() => (width.value = 1)}>
+			<Animated.View style={[ styles.overlay, animateWidth ]} />
+			<Animated.View style={[ styles.success, successY ]}>
+				<Icon name='check' size={24} color='#fff' />
+				<Text style={styles.successText}>Success</Text>
+			</Animated.View>
+			<View style={styles.downloadContainer}>
+				<Animated.View style={iconY}>
+					<Icon name='download' size={18} color='#000' />
 				</Animated.View>
-				<View style={styles.downloadContainer}>
-					<Animated.View style={iconY}>
-						<Icon name='download' size={18} color='#000' />
-					</Animated.View>
-					<Animated.Text style={[ styles.text, animateText ]}>Download</Animated.Text>
-				</View>
-			</Pressable>
-		</View>
+				<Animated.Text style={[ styles.text, animateText ]}>Download</Animated.Text>
+			</View>
+		</Pressable>
 	)
 }
 
-export default AnimateButton
+export default DownloadButton
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
 	overlay: {
 		position: 'absolute',
 		top: 0,
