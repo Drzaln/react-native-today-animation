@@ -1,40 +1,35 @@
 import React from 'react'
 import { Pressable, StyleSheet, Text } from 'react-native'
-import Animated, {
-	interpolateColor,
-	useAnimatedStyle,
-	useSharedValue,
-	withDelay,
-	withTiming
-} from 'react-native-reanimated'
+import Animated, { useAnimatedStyle, useSharedValue, withDelay, withTiming } from 'react-native-reanimated'
 
 const RadioButton = ({ title, color = '#8ecae6' }) => {
 	const radioState = useSharedValue(0)
 
 	const animatedContainer = useAnimatedStyle(() => {
+		const borderColor = radioState.value ? color : '#ced4da'
 		return {
-			borderWidth: radioState.value ? withTiming(15) : withDelay(410, withTiming(2)),
-			borderColor: interpolateColor(radioState.value, [ 0, 1 ], [ '#ced4da', color ])
+			borderWidth: radioState.value ? withTiming(15) : withDelay(300, withTiming(2)),
+			borderColor: withTiming(borderColor)
 		}
 	})
 	const firstAnimate = useAnimatedStyle(() => {
 		return {
 			transform: [
-				{ translateY: radioState.value ? withDelay(400, withTiming(0)) : withDelay(300, withTiming(-30)) }
+				{ translateY: radioState.value ? withDelay(400, withTiming(0)) : withDelay(100, withTiming(-30)) }
 			]
 		}
 	})
 	const secondAnimate = useAnimatedStyle(() => {
 		return {
 			transform: [
-				{ translateY: radioState.value ? withDelay(450, withTiming(0)) : withDelay(350, withTiming(-30)) }
+				{ translateY: radioState.value ? withDelay(450, withTiming(0)) : withDelay(150, withTiming(-30)) }
 			]
 		}
 	})
 	const thirdAnimate = useAnimatedStyle(() => {
 		return {
 			transform: [
-				{ translateY: radioState.value ? withDelay(485, withTiming(0)) : withDelay(385, withTiming(-30)) }
+				{ translateY: radioState.value ? withDelay(485, withTiming(0)) : withDelay(185, withTiming(-30)) }
 			]
 		}
 	})

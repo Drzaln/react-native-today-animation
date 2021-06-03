@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text } from 'react-native'
 import Animated, {
 	interpolateColor,
 	runOnJS,
-	useAnimatedProps,
+	useAnimatedStyle,
 	useSharedValue,
 	withDelay,
 	withTiming
@@ -20,7 +20,7 @@ const Check1 = ({ textContent, color = '#2a9d8f', size = 20, iconColor = '#fff' 
 		animateDash.value = !animateDash.value
 	}
 
-	const animatedProps = useAnimatedProps(() => ({
+	const animatedProps = useAnimatedStyle(() => ({
 		strokeDashoffset: animateDash.value
 			? withDelay(
 					400,
@@ -37,12 +37,12 @@ const Check1 = ({ textContent, color = '#2a9d8f', size = 20, iconColor = '#fff' 
 				})
 	}))
 
-	const animateBg = useAnimatedProps(() => ({
+	const animateBg = useAnimatedStyle(() => ({
 		transform: [ { scale: animateDash.value ? withTiming(1) : withDelay(550, withTiming(0)) } ],
 		backgroundColor: color
 	}))
 
-	const animateContainer = useAnimatedProps(() => ({
+	const animateContainer = useAnimatedStyle(() => ({
 		borderColor: interpolateColor(animateDash.value, [ 0, 1 ], [ '#8d99ae', color ])
 	}))
 

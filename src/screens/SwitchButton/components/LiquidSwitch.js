@@ -1,19 +1,14 @@
 import React from 'react'
 import { Pressable, StyleSheet, Text } from 'react-native'
-import Animated, {
-	interpolateColor,
-	useAnimatedStyle,
-	useSharedValue,
-	withDelay,
-	withTiming
-} from 'react-native-reanimated'
+import Animated, { useAnimatedStyle, useSharedValue, withDelay, withTiming } from 'react-native-reanimated'
 
 const LiquidSwitch = ({ title, activeColor = '#00bbf9', inactiveColor = '#adb5bd' }) => {
 	const switchState = useSharedValue(0)
 
 	const animatedContainer = useAnimatedStyle(() => {
+		const backgroundColor = switchState.value ? activeColor : inactiveColor
 		return {
-			backgroundColor: interpolateColor(switchState.value, [ 0, 1 ], [ inactiveColor, activeColor ])
+			backgroundColor: withTiming(backgroundColor)
 		}
 	})
 	const firstAnimate = useAnimatedStyle(() => {
