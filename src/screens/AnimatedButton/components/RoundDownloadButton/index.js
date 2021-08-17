@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import CircleAnimate from './components/CircleAnimate'
 
 const RoundDownload = () => {

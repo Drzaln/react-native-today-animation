@@ -1,102 +1,139 @@
-import React, { useMemo } from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import React from 'react';
+import {useCallback} from 'react';
+import {Pressable, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Animated, {
-	interpolateNode,
-	multiply,
-	set,
-	timing,
-	useAnimatedStyle,
-	useCode,
-	useSharedValue,
-	withTiming
-} from 'react-native-reanimated'
-import Svg, { Circle } from 'react-native-svg'
-import { clamp, toRad } from '../../../../../utils'
-const AnimatedCircle = Animated.createAnimatedComponent(Circle)
-const AnimatedSVG = Animated.createAnimatedComponent(Svg)
+  useSharedValue,
+  withTiming,
+  useAnimatedProps,
+  withDelay,
+} from 'react-native-reanimated';
 
-const CircleAnimate = ({
-	percent = 75,
-	duration = 1000,
-	bgStrokeColor = '#3E4346',
-	radius = 40,
-	isRadius = false,
-	strokeColor = '#FFC93C',
-	strokeWidth = 6,
-	maxProgress = 100,
-	minProgress = 0
+import Svg, {Circle} from 'react-native-svg';
+import ArrowDown from './ArrowDown';
+import Bucket from './Bucket';
+const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+
+export default CircleAnimate = ({
+  bgStrokeColor = '#303858',
+  strokeColor = '#589CEC',
+  strokeWidth = 6,
+  r = 40,
 }) => {
-	const progressAnimated = useSharedValue(0)
-	const progressSpin = useSharedValue(0)
-	const actualProgress = clamp(progressAnimated.value, minProgress, maxProgress)
+  const progress = useSharedValue(0);
+  const arrowAnimate = useSharedValue(0);
+  const borderAnimate = useSharedValue(0);
+  const textAnimate = useSharedValue(0);
 
-	// useCode(() => [ set(progressAnimated.value, timing({ from: progressAnimated.value, to: percent, duration })) ], [
-	// 	percent
-	// ])
+  const CIRCLE_LENGTH = 2 * Math.PI * r; // 2PI*r
 
-	// React.useEffect(
-	// 	() => {
-	// 		progressAnimated.value = withTiming(percent)
-	// 	},
-	// 	[ percent ]
-	// )
+  const animatedProps = useAnimatedProps(() => ({
+    strokeDashoffset: CIRCLE_LENGTH * (1 - progress.value),
+  }));
 
-	const strokeDasharray = useMemo(() => `${radius * 2 * Math.PI} ${radius * 2 * Math.PI}`, [ radius ])
-	const alpha = interpolateNode(actualProgress, {
-		inputRange: [ minProgress, maxProgress ],
-		outputRange: [ Math.PI * 2, 0 ]
-	})
-	const strokeDashoffset = multiply(alpha, radius)
+  const animatedStyle = useAnimatedProps(() => ({
+    transform: [
+      {
+        translateY: arrowAnimate.value ? withTiming(70) : withTiming(0),
+      },
+    ],
+  }));
 
-	// const animatedProps = useAnimatedStyle(() => ({
-	// 	transform: [
-	// 		{
-	// 			rotate: interpolateNode(progressSpin.value, {
-	// 				inputRange: [ 0, 1 ],
-	// 				outputRange: [ toRad(0), Math.PI * 2 ]
-	// 			})
-	// 		}
-	// 	]
-	// }))
+  const borderStyleAnimation = useAnimatedProps(() => ({
+    borderWidth: borderAnimate.value ? withTiming(43) : withTiming(0),
+  }));
 
-	const animate = () => {
-		(progressAnimated.value = withTiming(percent, { duration }))
-	}
+  const textAnimationStyle = useAnimatedProps(() => ({
+    opacity: textAnimate.value ? withTiming(1) : withTiming(0),
+  }));
 
-	return (
-		<Pressable style={[ styles.container ]} onPress={animate}>
-			<AnimatedSVG
-				width={radius * 2 + strokeWidth}
-				height={radius * 2 + strokeWidth}
-				style={{ transform: [ { rotate: `${Math.PI * 1}rad` } ] }}>
-				<AnimatedCircle
-					r={radius}
-					x={radius + strokeWidth / 2}
-					y={radius + strokeWidth / 2}
-					stroke={bgStrokeColor}
-					strokeWidth={strokeWidth}
-				/>
-				<AnimatedCircle
-					strokeLinecap={isRadius ? 'round' : undefined}
-					strokeDashoffset={strokeDashoffset}
-					strokeDasharray={strokeDasharray}
-					r={radius}
-					x={radius + strokeWidth / 2}
-					y={radius + strokeWidth / 2}
-					stroke={strokeColor}
-					strokeWidth={strokeWidth}
-				/>
-			</AnimatedSVG>
-		</Pressable>
-	)
-}
+  const onPress = useCallback(() => {
+    arrowAnimate.value = withTiming(!arrowAnimate.value, {duration: 800});
+    progress.value = withDelay(
+      400,
+      withTiming(!progress.value, {duration: 2000}, () => {
+        borderAnimate.value = withTiming(1, {}, isFinished => {
+          if (isFinished) {
+            textAnimate.value = withTiming(1, {}, isFinished => {
+              if (isFinished) {
+                progress.value = withDelay(800, withTiming(0));
+                arrowAnimate.value = withDelay(800, withTiming(0));
+                borderAnimate.value = withDelay(800, withTiming(0));
+                textAnimate.value = withDelay(
+                  800,
+                  withTiming(0, {duration: 10}),
+                );
+              }
+            });
+          }
+        });
+      }),
+    );
+  }, []);
 
-export default CircleAnimate
+  return (
+    <Pressable onPress={onPress} style={styles.mainContainer}>
+      <Animated.View style={[styles.borderStyle, borderStyleAnimation]}>
+        <View style={styles.textContainer}>
+          <Animated.Text style={[styles.textStyle, textAnimationStyle]}>
+            Done
+          </Animated.Text>
+        </View>
+      </Animated.View>
+      <View style={styles.arrowContainer}>
+        <Animated.View style={animatedStyle}>
+          <ArrowDown />
+        </Animated.View>
+        <Bucket />
+      </View>
+      <Svg
+        width={r * 2 + strokeWidth}
+        height={r * 2 + strokeWidth}
+        style={{transform: [{rotate: `${Math.PI * 0.5}rad`}]}}>
+        <Circle
+          cx={r + strokeWidth / 2}
+          cy={r + strokeWidth / 2}
+          r={r}
+          stroke={bgStrokeColor}
+          strokeWidth={strokeWidth}
+        />
+        <AnimatedCircle
+          cx={r + strokeWidth / 2}
+          cy={r + strokeWidth / 2}
+          r={r}
+          stroke={strokeColor}
+          strokeWidth={strokeWidth}
+          strokeDasharray={CIRCLE_LENGTH}
+          animatedProps={animatedProps}
+          strokeLinecap={'round'}
+        />
+      </Svg>
+    </Pressable>
+  );
+};
 
 const styles = StyleSheet.create({
-	container: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		transform: [ { rotate: '90deg' } ]
-	}
-})
+  mainContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  textContainer: {
+    position: 'absolute',
+    zIndex: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  arrowContainer: {position: 'absolute', alignItems: 'center'},
+  borderStyle: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    borderRadius: 100,
+    zIndex: 2,
+    borderColor: '#06D6A0',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textStyle: {fontSize: 18, fontWeight: 'bold', color: 'white'},
+});
