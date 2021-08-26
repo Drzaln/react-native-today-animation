@@ -11,7 +11,7 @@ const SCREENS_LIST = [
 	{ screen: AnimatedRadioButton, screenRoute: 'AnimatedRadioButton', name: 'Animated Radio Button' },
 	{ screen: SwitchButton, screenRoute: 'SwitchButton', name: 'Animated Switch Button' },
 	{ screen: CheckButton, screenRoute: 'CheckButton', name: 'Animated Check Button' },
-	{ screen: GojekBottomNav, screenRoute: 'GojekBottomNav', name: 'Gojek Bottom Navigation' }
+	// { screen: GojekBottomNav, screenRoute: 'GojekBottomNav', name: 'Gojek Bottom Navigation' }
 ]
 
 export default SCREENS_LIST
