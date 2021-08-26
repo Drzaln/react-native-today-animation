@@ -8,6 +8,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+import { clamp } from '../../utils';
 
 const {width, height} = Dimensions.get('window');
 
@@ -22,11 +23,6 @@ const GojekBottomNav = () => {
   const borVal = useSharedValue(startBor);
   const borZeroVal = useSharedValue(startBor);
   const maxHeight = Math.floor(height - 70);
-
-  const clamp = (value, lowerBound, upperBound) => {
-    'worklet';
-    return Math.min(Math.max(lowerBound, value), upperBound);
-  };
 
   const eventHandler = useAnimatedGestureHandler({
     onStart: (_, ctx) => {
