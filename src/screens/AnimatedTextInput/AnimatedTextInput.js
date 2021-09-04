@@ -1,20 +1,28 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
-import SearchInput from './components/SearchInput'
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
+import ExpandedSearch from './components/ExpandedSearch';
+import SearchInput from './components/SearchInput';
 
 const AnimatedTextInput = () => {
-	return (
-		<ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps='handled'>
-			<SearchInput />
-		</ScrollView>
-	)
-}
+  return (
+    <ScrollView
+      contentContainerStyle={styles.container}
+      keyboardShouldPersistTaps="handled">
+      <SearchInput />
+      <View style={styles.spacer} />
+      <ExpandedSearch />
+    </ScrollView>
+  );
+};
 
-export default AnimatedTextInput
+export default AnimatedTextInput;
 
 const styles = StyleSheet.create({
-	container: {
-		paddingVertical: 16
-	}
-})
+  container: {
+    paddingVertical: 16,
+  },
+  spacer: {
+    height: 60,
+  },
+});
