@@ -2,6 +2,8 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import SlidetoCompare from './components/SlidetoCompare';
 
+// not finished
+
 const CompareImage = () => {
   return (
     <View style={styles.container}>
