@@ -2,6 +2,7 @@ import AnimateButton from '../screens/AnimatedButton/AnimateButton'
 import AnimatedTextInput from '../screens/AnimatedTextInput/AnimatedTextInput'
 import CheckButton from '../screens/CheckButton'
 import GojekBottomNav from '../screens/GojekBottomNav'
+import MenuSection from '../screens/MenuSection'
 import AnimatedRadioButton from '../screens/RadioButton/AnimatedRadioButton'
 import Slider from '../screens/Slider'
 import CompareImage from '../screens/SlidetoCompare'
@@ -15,6 +16,7 @@ const SCREENS_LIST = [
 	{ screen: CheckButton, screenRoute: 'CheckButton', name: 'Animated Check Button' },
 	{ screen: Slider, screenRoute: 'Slider', name: 'Slider' },
 	{ screen: CompareImage, screenRoute: 'CompareImage', name: 'Compare Image' },
+	{ screen: MenuSection, screenRoute: 'Menu', name: 'Menu' },
 	// { screen: GojekBottomNav, screenRoute: 'GojekBottomNav', name: 'Gojek Bottom Navigation' }
 ]
 
