@@ -362,7 +362,7 @@ const ImageScroll = () => {
       color.ref?.current?.measureLayout(
         rowContainer.current,
         (x, y, width, height) => {
-          m.push({x});
+          m.push({x, width});
           if (m.length === indicators.length) {
             setMeasures(m);
           }
@@ -381,15 +381,6 @@ const ImageScroll = () => {
       }}
     />
   );
-
-  const outputRange =
-    measures.length > 0 ? measures.map(measure => measure.x) : [0, 1, 2, 3, 4];
-
-  const translateX = scrollX.interpolate({
-    inputRange: indicators.map((_, i) => i * imageSize),
-    outputRange,
-    extrapolate: 'clamp',
-  });
 
   return (
     <View>
@@ -428,20 +419,35 @@ const ImageScroll = () => {
             }}
           />
         ))}
-        {measures.length > 0 && (
-          <Animated.View
-            style={{
-              position: 'absolute',
-              height: 4,
-              backgroundColor: colorTheme.primary,
-              borderRadius: 50,
-              width: 50,
-              left: 0,
-              transform: [{translateX}],
-            }}
+        {measures.length === indicators.length ? (
+          <ImageIndicator
+            measures={measures}
+            scrollX={scrollX}
+            imageSize={imageSize}
           />
-        )}
+        ) : null}
       </View>
     </View>
+  );
+};
+
+const ImageIndicator = ({measures, scrollX, imageSize}) => {
+  const translateX = scrollX.interpolate({
+    inputRange: measures.map((_, i) => i * imageSize),
+    outputRange: measures.map(measure => measure.x),
+    extrapolate: 'clamp',
+  });
+  return (
+    <Animated.View
+      style={{
+        position: 'absolute',
+        height: 4,
+        backgroundColor: colorTheme.primary,
+        borderRadius: 50,
+        width: measures[0].width,
+        left: 0,
+        transform: [{translateX}],
+      }}
+    />
   );
 };
