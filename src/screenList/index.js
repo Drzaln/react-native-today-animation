@@ -3,6 +3,7 @@ import AnimatedTextInput from '../screens/AnimatedTextInput/AnimatedTextInput';
 import CheckButton from '../screens/CheckButton';
 import ForeCoffeeMenu from '../screens/ForeCoffee/ForeCoffeeMenu';
 import AnimatedRadioButton from '../screens/RadioButton/AnimatedRadioButton';
+import RNGH2 from '../screens/RNGH2/RNGH2';
 import Slider from '../screens/Slider';
 import CompareImage from '../screens/SlidetoCompare';
 import SwitchButton from '../screens/SwitchButton';
@@ -39,6 +40,11 @@ const SCREENS_LIST = [
     screen: ForeCoffeeMenu,
     screenRoute: 'ForeCoffeeMenu',
     name: 'Fore Coffee Menu',
+  },
+  {
+    screen: RNGH2,
+    screenRoute: 'RNGH2',
+    name: 'RN Gesture Handler 2',
   },
 ];
 

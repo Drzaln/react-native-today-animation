@@ -2,13 +2,12 @@ import React from 'react';
 import {StyleSheet, View, Alert, Dimensions} from 'react-native';
 import Animated, {
   useSharedValue,
-  useAnimatedGestureHandler,
   useAnimatedStyle,
   useDerivedValue,
   useAnimatedProps,
   runOnJS,
 } from 'react-native-reanimated';
-import {PanGestureHandler} from 'react-native-gesture-handler';
+import {GestureDetector, Gesture} from 'react-native-gesture-handler';
 import {clamp} from '../../../utils';
 import AnimateableText from 'react-native-animateable-text';
 const {width} = Dimensions.get('window');
@@ -24,31 +23,28 @@ const SimpleSlider = ({
 }) => {
   const translateX = useSharedValue(0);
   const isSliding = useSharedValue(false);
+  const startValue = useSharedValue(0);
 
   const onDraggedSuccess = () => {
     Alert.alert('dragged');
   };
 
-  const onGestureEvent = useAnimatedGestureHandler({
-    onStart: (_, ctx) => {
-      ctx.offsetX = translateX.value;
-    },
-    onActive: (event, ctx) => {
+  const gesture = Gesture.Pan()
+    .onUpdate(e => {
       isSliding.value = true;
       translateX.value = clamp(
-        event.translationX + ctx.offsetX,
+        e.translationX + startValue.value,
         0,
         sliderWidth - knobWidth,
       );
-    },
-    onEnd: () => {
+    })
+    .onEnd(() => {
       isSliding.value = false;
-
-      if (translateX.value > sliderWidth - knobWidth - 3) {
+      startValue.value = translateX.value;
+      if (startValue.value > sliderWidth - knobWidth / 2) {
         runOnJS(onDraggedSuccess)();
       }
-    },
-  });
+    });
 
   const scrollTranslationStyle = useAnimatedStyle(() => {
     return {transform: [{translateX: translateX.value}]};
@@ -79,7 +75,7 @@ const SimpleSlider = ({
       <Animated.View
         style={[styles.progress(knobWidth, activeTrailColor), progressStyle]}
       />
-      <PanGestureHandler onGestureEvent={onGestureEvent}>
+      <GestureDetector gesture={gesture}>
         <Animated.View
           style={[styles.knob(knobWidth, knobColor), scrollTranslationStyle]}>
           <AnimateableText
@@ -87,7 +83,7 @@ const SimpleSlider = ({
             style={styles.text(textColor)}
           />
         </Animated.View>
-      </PanGestureHandler>
+      </GestureDetector>
     </View>
   );
 };

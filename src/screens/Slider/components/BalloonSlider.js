@@ -2,14 +2,13 @@ import React from 'react';
 import {StyleSheet, View, Dimensions} from 'react-native';
 import Animated, {
   useSharedValue,
-  useAnimatedGestureHandler,
   useAnimatedStyle,
   useDerivedValue,
   useAnimatedProps,
   withTiming,
   withSpring,
 } from 'react-native-reanimated';
-import {PanGestureHandler} from 'react-native-gesture-handler';
+import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {clamp} from '../../../utils';
 import AnimateableText from 'react-native-animateable-text';
 const {width} = Dimensions.get('window');
@@ -24,6 +23,7 @@ const BalloonSlider = ({
   textColor = 'white',
 }) => {
   const translateX = useSharedValue(0);
+  const startValue = useSharedValue(0);
   const littleKnobAnimate = useSharedValue(false);
   const isSliding = useSharedValue(false);
   const veloX = useSharedValue(0);
@@ -43,26 +43,25 @@ const BalloonSlider = ({
     }
   };
 
-  const onGestureEvent = useAnimatedGestureHandler({
-    onStart: (_, ctx) => {
-      ctx.offsetX = translateX.value;
+  const gesture = Gesture.Pan()
+    .onBegin(() => {
       littleKnobAnimate.value = true;
-    },
-    onActive: (event, ctx) => {
+    })
+    .onUpdate(e => {
       isSliding.value = true;
       translateX.value = clamp(
-        event.translationX + ctx.offsetX,
+        e.translationX + startValue.value,
         0,
         sliderWidth - knobWidth,
       );
-      veloX.value = event.velocityX - ctx.offsetX;
-    },
-    onEnd: () => {
+      veloX.value = e.velocityX - startValue.value;
+    })
+    .onEnd(() => {
+      startValue.value = translateX.value;
       isSliding.value = false;
       littleKnobAnimate.value = false;
       veloX.value = 0;
-    },
-  });
+    });
 
   const scrollTranslationStyle = useAnimatedStyle(() => {
     return {
@@ -144,7 +143,7 @@ const BalloonSlider = ({
         <Animated.View
           style={[styles.progress(knobWidth, activeTrailColor), progressStyle]}
         />
-        <PanGestureHandler onGestureEvent={onGestureEvent}>
+        <GestureDetector gesture={gesture}>
           <Animated.View
             style={[styles.knob(knobWidth, knobColor), scrollTranslationStyle]}>
             <Animated.View
@@ -156,7 +155,7 @@ const BalloonSlider = ({
               ]}
             />
           </Animated.View>
-        </PanGestureHandler>
+        </GestureDetector>
       </View>
     </>
   );
