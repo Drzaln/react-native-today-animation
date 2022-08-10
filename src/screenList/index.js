@@ -1,12 +1,12 @@
 import AnimateButton from '../screens/AnimatedButton/AnimateButton';
 import AnimatedTextInput from '../screens/AnimatedTextInput/AnimatedTextInput';
-import CheckButton from '../screens/CheckButton';
+import CheckButton from '../screens/CheckButton/CheckButton';
 import ForeCoffeeMenu from '../screens/ForeCoffee/ForeCoffeeMenu';
 import AnimatedRadioButton from '../screens/RadioButton/AnimatedRadioButton';
 import RNGH2 from '../screens/RNGH2/RNGH2';
 import Slider from '../screens/Slider';
 import CompareImage from '../screens/SlidetoCompare';
-import SwitchButton from '../screens/SwitchButton';
+import SwitchButton from '../screens/SwitchButton/SwitchButton';
 
 const SCREENS_LIST = [
   {

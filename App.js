@@ -1,12 +1,10 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {enableScreens} from 'react-native-screens';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/screens/Home';
 import SCREENS_LIST from './src/screenList';
-enableScreens();
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
