@@ -14,7 +14,7 @@ const AnimateButton = () => {
       <View style={styles.spacer} />
       <View style={styles.spacer} />
       <View style={styles.spacer} />
-      <BalloonSlider/>
+      <BalloonSlider />
       <View style={styles.spacer} />
     </ScrollView>
   );
