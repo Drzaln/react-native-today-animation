@@ -1,4 +1,4 @@
-import {Dimensions, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import Animated, {
   useAnimatedProps,
@@ -9,6 +9,7 @@ import Animated, {
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {clamp} from '../../utils';
 import AnimateableText from 'react-native-animateable-text';
+import MaskedView from '@react-native-masked-view/masked-view';
 const {width} = Dimensions.get('window');
 
 const borderRadius = 12,
@@ -68,6 +69,12 @@ const IBattery = () => {
     };
   });
 
+  const darkStyle = useAnimatedStyle(() => {
+    return {
+      width: `${stepText.value}%`,
+    };
+  });
+
   const animatedProps = useAnimatedProps(() => {
     return {
       text: stepText.value,
@@ -80,10 +87,19 @@ const IBattery = () => {
         <View style={styles.battery}>
           <Animated.View style={[styles.batteryCapacity, capacityStyle]} />
           <View style={styles.textContainer}>
-            <AnimateableText
-              animatedProps={animatedProps}
-              style={styles.text}
-            />
+            <MaskedView
+              style={styles.mask}
+              maskElement={
+                <View style={styles.textWrapper}>
+                  <AnimateableText
+                    animatedProps={animatedProps}
+                    style={styles.text}
+                  />
+                </View>
+              }>
+              <Animated.View style={[styles.dark, darkStyle]} />
+              <View style={styles.light} />
+            </MaskedView>
           </View>
         </View>
         <View style={styles.capContainer}>
@@ -127,10 +143,15 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: borderRadius / 2,
   },
+  mask: {flex: 1, flexDirection: 'row', height: '100%'},
   textContainer: {
     ...StyleSheet.absoluteFill,
+  },
+  textWrapper: {
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
+    height: '100%',
   },
   text: {fontSize: 28, fontWeight: '700', color: '#f2f2f2'},
   capContainer: {
@@ -147,6 +168,15 @@ const styles = StyleSheet.create({
     borderRadius: 22 / 2,
     position: 'absolute',
     left: -22 / 2,
+  },
+  dark: {
+    height: '100%',
+    backgroundColor: 'rgb(44,44,46)',
+  },
+  light: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgb(242,242,247)',
   },
 
   slider: (knobWidth, sliderWidth, trailColor) => ({
