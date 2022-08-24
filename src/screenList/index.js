@@ -3,6 +3,7 @@ import AnimatedTextInput from '../screens/AnimatedTextInput/AnimatedTextInput';
 import CheckButton from '../screens/CheckButton/CheckButton';
 import ForeCoffeeMenu from '../screens/ForeCoffee/ForeCoffeeMenu';
 import IBattery from '../screens/IBattery/IBattery';
+import IosIcon from '../screens/IosIcon/IosIcon';
 import AnimatedRadioButton from '../screens/RadioButton/AnimatedRadioButton';
 import RNGH2 from '../screens/RNGH2/RNGH2';
 import Slider from '../screens/Slider';
@@ -48,10 +49,15 @@ const SCREENS_LIST = [
     name: 'iOS Battery Slider',
   },
   {
-    screen: RNGH2,
-    screenRoute: 'RNGH2',
-    name: 'RN Gesture Handler 2',
+    screen: IosIcon,
+    screenRoute: 'IosIcon',
+    name: 'iOS App Install Animation',
   },
+  // {
+  //   screen: RNGH2,
+  //   screenRoute: 'RNGH2',
+  //   name: 'RN Gesture Handler 2',
+  // },
 ];
 
 export default SCREENS_LIST;
