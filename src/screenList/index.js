@@ -6,6 +6,7 @@ import IBattery from '../screens/IBattery/IBattery';
 import IosIcon from '../screens/IosIcon/IosIcon';
 import AnimatedRadioButton from '../screens/RadioButton/AnimatedRadioButton';
 import RNGH2 from '../screens/RNGH2/RNGH2';
+import ScrollIndicator from '../screens/ScrollIndicator/ScrollIndicator';
 import Slider from '../screens/Slider';
 import CompareImage from '../screens/SlidetoCompare';
 import SwitchButton from '../screens/SwitchButton/SwitchButton';
@@ -52,6 +53,11 @@ const SCREENS_LIST = [
     screen: IosIcon,
     screenRoute: 'IosIcon',
     name: 'iOS App Install Animation',
+  },
+  {
+    screen: ScrollIndicator,
+    screenRoute: 'ScrollIndicator',
+    name: 'Scroll Indicator Animation',
   },
   // {
   //   screen: RNGH2,
