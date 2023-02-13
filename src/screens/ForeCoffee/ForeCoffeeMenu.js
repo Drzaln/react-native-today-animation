@@ -134,6 +134,7 @@ const ForeCoffeeMenu = () => {
           contentContainerStyle={{padding: 20}}
           showsVerticalScrollIndicator={false}
           overScrollMode="never"
+          scrollEventThrottle={16}
           onScroll={ev => {
             // console.log(
             //   'set active ==> ',
@@ -397,6 +398,7 @@ const ImageScroll = () => {
           data={colors5}
           renderItem={renderItem}
           keyExtractor={(_, index) => index}
+          scrollEventThrottle={16}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {x: scrollX}}}],
             {useNativeDriver: true},
