@@ -13,7 +13,7 @@ const Home = ({navigation}) => {
   );
 
   return (
-    <React.Fragment>
+    <>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
       <FlatList
         data={SCREENS_LIST}
@@ -22,7 +22,7 @@ const Home = ({navigation}) => {
         keyExtractor={item => item.name}
         contentContainerStyle={styles.list}
       />
-    </React.Fragment>
+    </>
   );
 };
 export default Home;
