@@ -1,3 +1,4 @@
+import AnalogClockLoading from '../screens/AnalogClockLoading/AnalogClockLoading';
 import AnimateButton from '../screens/AnimatedButton/AnimateButton';
 import AnimatedTextInput from '../screens/AnimatedTextInput/AnimatedTextInput';
 import CheckButton from '../screens/CheckButton/CheckButton';
@@ -58,6 +59,11 @@ const SCREENS_LIST = [
     screen: ScrollIndicator,
     screenRoute: 'ScrollIndicator',
     name: 'Scroll Indicator Animation',
+  },
+  {
+    screen: AnalogClockLoading,
+    screenRoute: 'AnalogClockLoading',
+    name: 'Analog Clock Loading Animation',
   },
   // {
   //   screen: RNGH2,
