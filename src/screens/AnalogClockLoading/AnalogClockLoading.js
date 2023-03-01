@@ -8,6 +8,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 const SIZE = 100;
+const DURATION = 1000;
 
 const AnalogClockLoading = () => {
   const hourAnimate = useSharedValue(0);
@@ -24,7 +25,7 @@ const AnalogClockLoading = () => {
     if (hourAnimate.value === 360) {
       oldMinute.value = minuteAnimate.value;
       minuteAnimate.value = withTiming(oldMinute.value + 30, {
-        duration: 1500,
+        duration: DURATION,
         easing: Easing.linear,
       });
     }
@@ -39,7 +40,7 @@ const AnalogClockLoading = () => {
 
   useEffect(() => {
     hourAnimate.value = withRepeat(
-      withTiming(360, {duration: 1500, easing: Easing.linear}),
+      withTiming(360, {duration: DURATION, easing: Easing.linear}),
       -1,
     );
   }, [hourAnimate]);

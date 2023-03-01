@@ -10,6 +10,7 @@ import RNGH2 from '../screens/RNGH2/RNGH2';
 import ScrollIndicator from '../screens/ScrollIndicator/ScrollIndicator';
 import Slider from '../screens/Slider';
 import CompareImage from '../screens/SlidetoCompare';
+import Stepper from '../screens/Stepper/Stepper';
 import SwitchButton from '../screens/SwitchButton/SwitchButton';
 
 const SCREENS_LIST = [
@@ -64,6 +65,11 @@ const SCREENS_LIST = [
     screen: AnalogClockLoading,
     screenRoute: 'AnalogClockLoading',
     name: 'Analog Clock Loading Animation',
+  },
+  {
+    screen: Stepper,
+    screenRoute: 'Stepper',
+    name: 'Stepper Animation',
   },
   // {
   //   screen: RNGH2,
