@@ -2,6 +2,7 @@ import AnalogClockLoading from '../screens/AnalogClockLoading/AnalogClockLoading
 import AnimateButton from '../screens/AnimatedButton/AnimateButton';
 import AnimatedTextInput from '../screens/AnimatedTextInput/AnimatedTextInput';
 import CheckButton from '../screens/CheckButton/CheckButton';
+import Drag from '../screens/Drag/Drag';
 import ForeCoffeeMenu from '../screens/ForeCoffee/ForeCoffeeMenu';
 import IBattery from '../screens/IBattery/IBattery';
 import IosIcon from '../screens/IosIcon/IosIcon';
@@ -70,6 +71,11 @@ const SCREENS_LIST = [
     screen: Stepper,
     screenRoute: 'Stepper',
     name: 'Stepper Animation',
+  },
+  {
+    screen: Drag,
+    screenRoute: 'Drag',
+    name: 'Drag Animation',
   },
   // {
   //   screen: RNGH2,
