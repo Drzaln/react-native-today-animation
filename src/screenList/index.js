@@ -2,6 +2,7 @@ import AnalogClockLoading from '../screens/AnalogClockLoading/AnalogClockLoading
 import AnimateButton from '../screens/AnimatedButton/AnimateButton';
 import AnimatedTextInput from '../screens/AnimatedTextInput/AnimatedTextInput';
 import CheckButton from '../screens/CheckButton/CheckButton';
+import Collision from '../screens/Collision/Collision';
 import Drag from '../screens/Drag/Drag';
 import ForeCoffeeMenu from '../screens/ForeCoffee/ForeCoffeeMenu';
 import IBattery from '../screens/IBattery/IBattery';
@@ -77,6 +78,11 @@ const SCREENS_LIST = [
     screenRoute: 'Drag',
     name: 'Drag Animation',
   },
+  // {
+  //   screen: Collision,
+  //   screenRoute: 'Collision',
+  //   name: 'Collision Animation',
+  // },
   // {
   //   screen: RNGH2,
   //   screenRoute: 'RNGH2',
