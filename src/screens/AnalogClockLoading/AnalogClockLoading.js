@@ -22,13 +22,7 @@ const AnalogClockLoading = () => {
       withTiming(360, {duration: DURATION, easing: Easing.linear}),
       -1,
     );
-
-    return () => {
-      hourAnimate.value = 0;
-      minuteAnimate.value = 0;
-      oldMinute.value = 0;
-    };
-  }, []);
+  }, [hourAnimate]);
 
   const minute = useDerivedValue(() => {
     let newValue = newMinute.value;
