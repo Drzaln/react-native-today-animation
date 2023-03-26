@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import Animated, {
   Easing,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withRepeat,
   withTiming,
@@ -14,36 +15,48 @@ const AnalogClockLoading = () => {
   const hourAnimate = useSharedValue(0);
   const minuteAnimate = useSharedValue(0);
   const oldMinute = useSharedValue(0);
-
-  const hourAnimated = useAnimatedStyle(() => {
-    return {
-      transform: [{rotate: `${hourAnimate.value}deg`}],
-    };
-  });
-
-  const minuteAnimated = useAnimatedStyle(() => {
-    if (hourAnimate.value === 360) {
-      oldMinute.value = minuteAnimate.value;
-      minuteAnimate.value = withTiming(oldMinute.value + 30, {
-        duration: DURATION,
-        easing: Easing.linear,
-      });
-    }
-    return {
-      transform: [
-        {
-          rotate: `${minuteAnimate.value}deg`,
-        },
-      ],
-    };
-  });
+  const newMinute = useSharedValue(0);
 
   useEffect(() => {
     hourAnimate.value = withRepeat(
       withTiming(360, {duration: DURATION, easing: Easing.linear}),
       -1,
     );
-  }, [hourAnimate]);
+
+    return () => {
+      hourAnimate.value = 0;
+      minuteAnimate.value = 0;
+      oldMinute.value = 0;
+    };
+  }, []);
+
+  const minute = useDerivedValue(() => {
+    let newValue = newMinute.value;
+    if (Math.floor(hourAnimate.value) >= 360) {
+      oldMinute.value = minuteAnimate.value;
+      newMinute.value = oldMinute.value + 30;
+      newValue = newMinute.value;
+    } else {
+      minuteAnimate.value = newMinute.value;
+    }
+    return withTiming(newValue, {duration: DURATION, easing: Easing.linear});
+  });
+
+  const minuteAnimated = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          rotate: `${minute.value}deg`,
+        },
+      ],
+    };
+  });
+
+  const hourAnimated = useAnimatedStyle(() => {
+    return {
+      transform: [{rotate: `${hourAnimate.value}deg`}],
+    };
+  });
 
   return (
     <View style={styles.container}>
