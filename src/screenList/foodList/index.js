@@ -1,5 +1,5 @@
-import BottomTab from '../../screens/FoodScreens/BottomTab';
-import Onboard from '../../screens/FoodScreens/Onboard';
+import BottomTab from '../../screens/RecipeScreens/BottomTab';
+import Onboard from '../../screens/RecipeScreens/Onboard';
 
 const FOOD_SCREENS_LIST = [
   {
