@@ -4,6 +4,7 @@ import AnimatedTextInput from '../screens/AnimatedTextInput/AnimatedTextInput';
 import CheckButton from '../screens/CheckButton/CheckButton';
 import Collision from '../screens/Collision/Collision';
 import Drag from '../screens/Drag/Drag';
+import Onboard from '../screens/FoodScreens/Onboard';
 import ForeCoffeeMenu from '../screens/ForeCoffee/ForeCoffeeMenu';
 import IBattery from '../screens/IBattery/IBattery';
 import IosIcon from '../screens/IosIcon/IosIcon';
@@ -77,6 +78,11 @@ const SCREENS_LIST = [
     screen: Drag,
     screenRoute: 'Drag',
     name: 'Drag Animation',
+  },
+  {
+    screen: Onboard,
+    screenRoute: 'FoodApp',
+    name: 'Food App',
   },
   // {
   //   screen: Collision,

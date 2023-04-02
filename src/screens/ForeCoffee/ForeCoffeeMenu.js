@@ -9,6 +9,7 @@ import {
   Animated,
 } from 'react-native';
 import {useAnimatedRef} from 'react-native-reanimated';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const {width, height} = Dimensions.get('window');
@@ -121,34 +122,38 @@ const ForeCoffeeMenu = () => {
   };
 
   return (
-    <View style={{flexDirection: 'row', flex: 1}}>
-      <SideBar
-        ref={sideBarRef}
-        active={activeMenu}
-        onPress={i => scrollToHandler(i)}
-      />
-      <View style={{flex: 1, backgroundColor: colorTheme.bg_primary}}>
-        <Header />
-        <ScrollView
-          ref={rightScrollRef}
-          contentContainerStyle={{padding: 20}}
-          showsVerticalScrollIndicator={false}
-          overScrollMode="never"
-          scrollEventThrottle={16}
-          onScroll={ev => {
-            // console.log(
-            //   'set active ==> ',
-            //   Math.floor(ev.nativeEvent.contentOffset.y / height),
-            // );
-            // scrollToHandler(
-            //   Math.floor(ev.nativeEvent.contentOffset.y / height),
-            // );
-          }}>
-          <ImageScroll />
-          <FoodCategory data={data} />
-        </ScrollView>
+    <SafeAreaView
+      edges={['bottom']}
+      style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{flexDirection: 'row', flex: 1}}>
+        <SideBar
+          ref={sideBarRef}
+          active={activeMenu}
+          onPress={i => scrollToHandler(i)}
+        />
+        <View style={{flex: 1, backgroundColor: colorTheme.bg_primary}}>
+          <Header />
+          <ScrollView
+            ref={rightScrollRef}
+            contentContainerStyle={{padding: 20}}
+            showsVerticalScrollIndicator={false}
+            overScrollMode="never"
+            scrollEventThrottle={16}
+            onScroll={ev => {
+              // console.log(
+              //   'set active ==> ',
+              //   Math.floor(ev.nativeEvent.contentOffset.y / height),
+              // );
+              // scrollToHandler(
+              //   Math.floor(ev.nativeEvent.contentOffset.y / height),
+              // );
+            }}>
+            <ImageScroll />
+            <FoodCategory data={data} />
+          </ScrollView>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

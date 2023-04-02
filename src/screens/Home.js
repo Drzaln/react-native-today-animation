@@ -1,6 +1,7 @@
 import React from 'react';
 import {Pressable, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import SCREENS_LIST from '../screenList';
 
 const Home = ({navigation}) => {
@@ -13,7 +14,7 @@ const Home = ({navigation}) => {
   );
 
   return (
-    <>
+    <SafeAreaView edges={['left', 'right', 'bottom']} style={{flex: 1}}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
       <FlatList
         data={SCREENS_LIST}
@@ -22,7 +23,7 @@ const Home = ({navigation}) => {
         keyExtractor={item => item.name}
         contentContainerStyle={styles.list}
       />
-    </>
+    </SafeAreaView>
   );
 };
 export default Home;

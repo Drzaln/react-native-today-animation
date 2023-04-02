@@ -1,0 +1,50 @@
+[
+  {
+    "foodName": "Grilled Salmon with Mango Salsa",
+    "foodCalories": "350",
+    "foodCookTime": "20",
+    "foodStars": "4.8",
+    "foodImage": "https://images.unsplash.com/photo-1556040221-a1efce785fcc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80",
+    "foodCategory": "seafood"
+  },
+  {
+    "foodName": "Oatmeal with Soy Milk and Berries",
+    "foodCalories": "120",
+    "foodCookTime": "10",
+    "foodStars": "5",
+    "foodImage": "https://images.unsplash.com/photo-1610406765661-57646c40da59?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2274&q=80",
+    "foodCategory": "oatmeal"
+  },
+  {
+    "foodName": "Grilled Chicken Caesar Salad",
+    "foodCalories": "350",
+    "foodCookTime": "30",
+    "foodStars": "4.5",
+    "foodImage": "https://images.unsplash.com/photo-1604909052743-94e838986d24?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1760&q=80",
+    "foodCategory": "salad"
+  },
+  {
+    "foodName": "Beef and Broccoli Stir Fry",
+    "foodCalories": "450",
+    "foodCookTime": "20",
+    "foodStars": "4.2",
+    "foodImage": "https://images.unsplash.com/photo-1606070781631-a7e961f84c9e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80",
+    "foodCategory": "meat"
+  },
+  {
+    "foodName": "Shrimp Scampi Linguine",
+    "foodCalories": "400",
+    "foodCookTime": "25",
+    "foodStars": "4.8",
+    "foodImage": "https://images.unsplash.com/photo-1655279561980-c72226ffe505?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1366&q=80",
+    "foodCategory": "seafood"
+  },
+  {
+    "foodName": "Chicken Salad",
+    "foodCalories": "200",
+    "foodCookTime": "30",
+    "foodStars": "4",
+    "foodImage": "https://images.unsplash.com/photo-1605291535065-e1d52d2b264a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80",
+    "foodCategory": "salad"
+  }
+]
